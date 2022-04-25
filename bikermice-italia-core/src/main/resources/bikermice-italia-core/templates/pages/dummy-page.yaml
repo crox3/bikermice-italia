@@ -1,0 +1,10 @@
+templateScript: /bikermice-italia-core/templates/pages/dummy-page.ftl
+renderType: freemarker
+visible: true
+dialog: bikermice-italia-core:pages/dummy-page-properties
+areas:
+  main:
+    renderType: freemarker
+    availableComponents:
+      dummy-component:
+        id: bikermice-italia-core:components/dummy-component

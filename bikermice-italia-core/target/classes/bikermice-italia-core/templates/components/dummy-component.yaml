@@ -1,0 +1,2 @@
+templateScript: /bikermice-italia-core/templates/components/dummy-component.ftl
+renderType: freemarker

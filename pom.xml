@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.bikermice</groupId>
+  <artifactId>bikermice-italia</artifactId>
+  <name>bikermice-italia (parent pom)</name>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <magnoliaBundleVersion>6.2.6</magnoliaBundleVersion>
+    <javaVersion>11</javaVersion>
+    <maven.javadoc.skip>true</maven.javadoc.skip>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.javadoc.skip>true</maven.javadoc.skip>
+  </properties>
+
+  <!-- Fill the following in, so you can use the release plugin -->
+  <scm>
+    <connection/>
+    <developerConnection/>
+    <url/>
+  </scm>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>info.magnolia.bundle</groupId>
+        <artifactId>magnolia-bundle-parent</artifactId>
+        <version>${magnoliaBundleVersion}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.bikermice</groupId>
+        <artifactId>bikermice-italia-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.bikermice</groupId>
+        <artifactId>bikermice-italia-json</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <!-- fix vulnerability log4j -->
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>2.17.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.17.1</version>
+      </dependency>
+      <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <version>2.17.1</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.7.0</version>
+        <configuration>
+          <source>${javaVersion}</source>
+          <target>${javaVersion}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.3</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+        <configuration>
+          <excludePackageNames>com.efg.*</excludePackageNames>
+        </configuration>
+      </plugin>
+    </plugins>
+
+    <!-- default resources configuration which will filter your module descriptors -->
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </resource>
+      <resource>
+        <filtering>true</filtering>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>META-INF/magnolia/*</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>magnolia.public</id>
+      <url>https://nexus.magnolia-cms.com/content/groups/public</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <!-- IF YOU NEED MODULES FROM THE ENTERPRISE VERSION, UNCOMMENT THE FOLLOWING REPOSITORY -->
+    <!--
+    <repository>
+      <id>magnolia.enterprise.releases</id>
+      <url>https://nexus.magnolia-cms.com/content/repositories/magnolia.enterprise.releases</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    -->
+    <repository>
+      <id>vaadin-addons</id>
+      <url>https://maven.vaadin.com/vaadin-addons</url>
+    </repository>
+  </repositories>
+
+  <modules>
+    <module>bikermice-italia-webapp</module>
+    <module>bikermice-italia-json</module>
+    <module>bikermice-italia-core</module>
+  </modules>
+</project>
